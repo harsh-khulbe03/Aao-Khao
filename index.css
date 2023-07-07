@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+
+
+
+.about {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menu {
+  display: flex;
+  gap: 100px;
+  margin: 20px;
+}
+
+.menu img {
+  width: 370px;
+  height: 320px;
+}
+
+.card-link {
+  text-decoration: none;
+  color: black;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  margin-top: 24px;
+  margin-left: 18px;
+}
+
+.link:hover {
+  color: rgb(173, 50, 210);
+}
+
+*/

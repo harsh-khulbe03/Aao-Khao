@@ -1,0 +1,1 @@
+export default "dummy.jpg";
