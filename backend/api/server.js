@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3002;
 app.use(cors());
 
-app.get('/api',(req,res)=>{
+app.get('/',(req,res)=>{
     res.send("Hello Harsh")
 })
 
