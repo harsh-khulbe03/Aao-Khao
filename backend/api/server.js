@@ -4,7 +4,11 @@ const fetch = require('cross-fetch');
 
 const app = express();
 const port = process.env.PORT || 3002;
-app.use(cors());
+// app.use(cors());
+
+app.use(cors({
+    origin: '*', // Allows all origins; modify as needed
+}));
 
 app.get('/',(req,res)=>{
     res.send("Hello Harsh")
