@@ -15,6 +15,7 @@
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
+    "@parcel/babel-preset-env": "^2.12.0",
     "@parcel/transformer-react-refresh-wrap": "^2.12.0",
     "@testing-library/react": "^14.0.0",
     "autoprefixer": "^10.4.20",
