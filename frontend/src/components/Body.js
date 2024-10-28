@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
+const API_URL = process.env.MY_API_URL
 
 function filterData(searchText, restaurants) {
   const filterdata = restaurants.filter((restaurant) =>
@@ -22,7 +23,7 @@ const Body = () => {
   }, []);
 
   async function getRestaurants() {
-    fetch("http://localhost:3002/api/restaurants")
+    fetch(`${API_URL}/api/restaurants`)  
       .then(response =>
         response.json())
       .then(result => {

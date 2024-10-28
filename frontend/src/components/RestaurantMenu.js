@@ -5,10 +5,11 @@ import Shimmer from "./Shimmer";
 import { useDispatch } from "react-redux";
 import { addItem } from "../utils/createSlice";
 import RestaurantMenuItems from "./RestaurantMenuItems";
+const API_URL = process.env.MY_API_URL
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
-  // console.log(resId);
+
   const [restaurant, setRestaurant] = useState(null);
 
   const [menu, setMenu] = useState([]);
@@ -24,9 +25,7 @@ const RestaurantMenu = () => {
   }, []);
 
 function getRestaurantInfo() {
-    // const data = await fetch(SWIGGY_MENU_API_URL + resId);
-    // const json = await data.json();
-    fetch(`http://localhost:3002/api/menu/${resId}`).then((response) => {
+    fetch(`${API_URL}/api/menu/${resId}`).then((response) => {
       return response.json();
     }).then((res) => {
       // console.log(data);
