@@ -1,8 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const fetch = require('cross-fetch');
-
+const dotenv =require('dotenv')
 const app = express();
+dotenv.config()
 const port = process.env.PORT || 3002;
 // app.use(cors());
 
