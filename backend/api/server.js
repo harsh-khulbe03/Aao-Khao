@@ -6,6 +6,10 @@ const app = express();
 const port = process.env.PORT || 3002;
 app.use(cors());
 
+app.get('/api',(req,res)=>{
+    res.send("Hello Harsh")
+})
+
 app.get('/api/restaurants', async (req, res) => {
     try {
         const result = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.73390&lng=76.78890&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING', {
