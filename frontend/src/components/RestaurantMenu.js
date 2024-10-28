@@ -5,7 +5,7 @@ import Shimmer from "./Shimmer";
 import { useDispatch } from "react-redux";
 import { addItem } from "../utils/createSlice";
 import RestaurantMenuItems from "./RestaurantMenuItems";
-const API_URL = process.env.MY_API_URL
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 const RestaurantMenu = () => {
   const { resId } = useParams();

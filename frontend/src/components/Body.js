@@ -2,7 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
-const API_URL = process.env.MY_API_URL
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 function filterData(searchText, restaurants) {
   const filterdata = restaurants.filter((restaurant) =>
