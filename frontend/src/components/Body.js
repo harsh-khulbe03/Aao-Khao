@@ -1,4 +1,3 @@
-import { SWIGGY_API_URL } from "../constant";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -23,22 +22,15 @@ const Body = () => {
   }, []);
 
   async function getRestaurants() {
-    const data = await fetch(SWIGGY_API_URL);
+    fetch("http://localhost:3002/api/restaurants")
+      .then(response =>
+        response.json())
+      .then(result => {
+        setAllRestaurants(result.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+        setFilteredRestaurants(result.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+      })
 
-    const json = await data.json();
-    console.log(json);
-    console.log(
-      json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
-    setAllRestaurants(
-      json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
-    setFilteredRestaurants(
-      json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
+      .catch(error => console.log('Error fetching data: ', error))
   }
 
   if (!allRestaurants) return null;

@@ -7,6 +7,7 @@ const RestaurantCard = ({
   avgRating,
   costForTwo,
 }) => {
+  
   // const {data} = restaurant;
   // const {cloudinaryImageId,name,cuisines,avgRating} = data;
   return (
@@ -21,3 +22,4 @@ const RestaurantCard = ({
 };
 
 export default RestaurantCard;
+

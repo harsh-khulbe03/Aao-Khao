@@ -23,19 +23,20 @@ const RestaurantMenu = () => {
     getRestaurantInfo();
   }, []);
 
-  async function getRestaurantInfo() {
-    const data = await fetch(SWIGGY_MENU_API_URL + resId);
-    const json = await data.json();
-
-    console.log(json);
-
-    console.log(
-      json?.data?.cards[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards
-    );
-    setRestaurant(json?.data?.cards[0]?.card?.card?.info);
-    setMenu(json?.data?.cards[2].groupedCard?.cardGroupMap?.REGULAR?.cards);
+function getRestaurantInfo() {
+    // const data = await fetch(SWIGGY_MENU_API_URL + resId);
+    // const json = await data.json();
+    fetch(`http://localhost:3002/api/menu/${resId}`).then((response) => {
+      return response.json();
+    }).then((res) => {
+      // console.log(data);
+      const menuData = res.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.slice(1);
+      setRestaurant(res?.data?.cards[2]?.card?.card?.info);
+      setMenu(res.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.slice(1));
+      console.log(menuData)
+    })
   }
-  console.log(menu);
+  // console.log(menu);
 
   return !restaurant ? (
     <Shimmer />
@@ -52,7 +53,7 @@ const RestaurantMenu = () => {
 
       <div className="p-2">
         <h1 className="font-bold text-2xl">Menu :</h1>
-        {menu.length === 0 ? (
+        {menu?.length === 0 ? (
           <p>No items found</p>
         ) : (
           <ul>
@@ -68,7 +69,7 @@ const RestaurantMenu = () => {
                   </button>
                 </li>
                 <RestaurantMenuItems
-                  key={id}
+                  key={item.id}
                   items={item?.card?.card?.itemCards}
                 />
               </>
