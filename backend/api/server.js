@@ -59,3 +59,5 @@ app.get('/api/menu/:id', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 });
+
+module.exports=app
