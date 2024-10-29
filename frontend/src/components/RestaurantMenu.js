@@ -5,8 +5,11 @@ import Shimmer from "./Shimmer";
 import { useDispatch } from "react-redux";
 import { addItem } from "../utils/createSlice";
 import RestaurantMenuItems from "./RestaurantMenuItems";
-const API_URL = process.env.NEXT_PUBLIC_API_URL
-
+// const API_URL = process.env.NEXT_PUBLIC_API_URL
+// const apiUrl = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_API_URL : process.env.REACT_APP_API_URL;
+const apiUrl = process.env.REACT_APP_API_URL;
+console.log(apiUrl);
+console.log(process.env.NODE_ENV);
 const RestaurantMenu = () => {
   const { resId } = useParams();
 
@@ -25,7 +28,7 @@ const RestaurantMenu = () => {
   }, []);
 
 function getRestaurantInfo() {
-    fetch(`${API_URL}/api/menu/${resId}`).then((response) => {
+    fetch(`${apiUrl}/api/menu/${resId}`).then((response) => {
       return response.json();
     }).then((res) => {
       // console.log(data);
