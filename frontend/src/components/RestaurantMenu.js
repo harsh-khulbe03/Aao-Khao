@@ -5,7 +5,6 @@ import Shimmer from "./Shimmer";
 import { useDispatch } from "react-redux";
 import { addItem } from "../utils/createSlice";
 import RestaurantMenuItems from "./RestaurantMenuItems";
-require('dotenv').config();
 
 // const API_URL = process.env.NEXT_PUBLIC_API_URL
 // const apiUrl = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_API_URL : process.env.REACT_APP_API_URL;
