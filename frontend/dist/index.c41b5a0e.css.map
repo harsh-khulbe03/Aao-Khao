@@ -1,0 +1,1 @@
+{"mappings":";ACCA","sources":["EoTrJG","custom.css"],"sourcesContent":[null,"@import url(\"https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap\");\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-family: \"Poppins\", sans-serif;\n}\n"],"names":[],"version":3,"file":"index.c41b5a0e.css.map","sourceRoot":"/__parcel_source_root/"}

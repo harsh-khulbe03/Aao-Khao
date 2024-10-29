@@ -5,18 +5,13 @@ const dotenv =require('dotenv')
 const app = express();
 dotenv.config()
 const port = process.env.PORT || 3002;
-// app.use(cors());
-
-const allowedOrigins = process.env.NODE_ENV === 'production'
-  ? 'https://aaokhao-frontend.vercel.app'
-  : 'http://localhost:1234';
 
 app.use(cors({
-    origin: allowedOrigins,
+    origin: ["https://aaokhao-frontend.vercel.app","http://localhost:1234"],
 }));
 
 app.get('/',(req,res)=>{
-    res.send("Hello Harsh")
+    res.send("Welcome to Aaokhao")
 })
 
 app.get('/api/restaurants', async (req, res) => {
