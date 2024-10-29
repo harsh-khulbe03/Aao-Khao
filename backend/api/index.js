@@ -9,11 +9,10 @@ const port = process.env.PORT || 3002;
 
 const allowedOrigins = process.env.NODE_ENV === 'production'
   ? 'https://aaokhao-frontend.vercel.app/'
-  : 'http://localhost:3002';
+  : 'http://localhost:1234';
 
 app.use(cors({
     origin: allowedOrigins,
-    credentials: true, 
 }));
 
 app.get('/',(req,res)=>{
