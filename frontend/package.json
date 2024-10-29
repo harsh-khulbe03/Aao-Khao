@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "NODE_ENV=development && parcel index.html",
+    "start": "NODE_ENV=development && rm -rf ./dist/* && parcel index.html",
     "build": "NODE_ENV=production && rm -rf ./dist/* && parcel build ./index.html",
     "test": "jest",
     "watch-test": "jest --watch"
