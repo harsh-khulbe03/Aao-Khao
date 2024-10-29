@@ -37235,8 +37235,8 @@ var _shimmer = require("./Shimmer");
 var _shimmerDefault = parcelHelpers.interopDefault(_shimmer);
 var _s = $RefreshSig$();
 // const API_URL = process.env.NEXT_PUBLIC_API_URL
+// const apiUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : process.env.REACT_APP_API_URL;
 const apiUrl = "http://localhost:3002";
-// const apiUrl = process.env.REACT_APP_API_URL
 console.log(apiUrl);
 function filterData(searchText, restaurants) {
     const filterdata = restaurants.filter((restaurant)=>restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase()));
