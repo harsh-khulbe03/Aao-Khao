@@ -7,8 +7,13 @@ dotenv.config()
 const port = process.env.PORT || 3002;
 // app.use(cors());
 
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? 'https://aaokhao-frontend.vercel.app/'
+  : 'http://localhost:3002';
+
 app.use(cors({
-    origin: '*', // Allows all origins; modify as needed
+    origin: allowedOrigins,
+    credentials: true, 
 }));
 
 app.get('/',(req,res)=>{
