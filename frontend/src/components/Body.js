@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 // const API_URL = process.env.NEXT_PUBLIC_API_URL
-// const apiUrl = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_API_URL : process.env.REACT_APP_API_URL;
-const apiUrl = process.env.REACT_APP_API_URL
+const apiUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : process.env.REACT_APP_API_URL;
+// const apiUrl = process.env.REACT_APP_API_URL
 console.log(apiUrl);
 function filterData(searchText, restaurants) {
   const filterdata = restaurants.filter((restaurant) =>
