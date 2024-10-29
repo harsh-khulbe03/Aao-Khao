@@ -57,19 +57,14 @@ Aaokhao is a modern food ordering web application where users can browse restaur
     npm install
     ```
 
-3. **Configure Tailwind CSS**:
-   Tailwind CSS is used for frontend styling. Ensure you have the correct setup:
-   - Tailwind is configured in `tailwind.config.js`
-   - Styles are imported into `index.css`
-
-4. **Run Frontend**:
+3. **Run Frontend**:
 
     ```bash
     cd frontend
     npm start
     ```
 
-5. **Run Backend (Proxy Server)**:
+4. **Run Backend (Proxy Server)**:
 
     ```bash
     cd backend
