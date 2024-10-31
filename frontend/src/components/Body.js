@@ -65,7 +65,7 @@ const Body = () => {
           <i className="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
-      <div className="flex justify-start flex-wrap w-[1380px] m-auto">
+      <div className="flex justify-start flex-wrap w-[1380px] ml-32">
         {filteredRestaurants?.map((restaurant) => {
           return (
             <Link
