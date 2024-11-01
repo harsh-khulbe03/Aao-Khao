@@ -11,7 +11,7 @@ const loggedInUser = () => {
 
 const Title = () => (
   <a href="/">
-    <img data-testid="logo" src={Logo} alt="logo" className="w-24 h-24" />
+    <img data-testid="logo" src={Logo} alt="logo" className="w-36 h-24" />
   </a>
 );
 
@@ -20,54 +20,53 @@ const Header = () => {
   const [isLoggedInUser, setIsLoggedInUser] = useState(false);
 
   const cartItems = useSelector((store) => store.cart.items);
-  console.log(cartItems);
 
   return (
-    <div className="flex justify-between m-3 border-spacing-1 border-2 border-indigo-100">
+    <div className="flex justify-between items-center p-4 border-b border-indigo-200 shadow-lg bg-white">
       <Title />
 
       <div>
-        <ul className="list-none flex">
-          <Link to="/" className="p-7 hover:text-orange-500">
+        <ul className="flex space-x-8 text-lg font-semibold">
+          <Link to="/" className="hover:text-orange-500">
             <li>Home</li>
           </Link>
-
-          <Link to="/about" className="p-7 hover:text-orange-500">
+          <Link to="/about" className="hover:text-orange-500">
             <li>About</li>
           </Link>
-
-          <Link to="/contact" className="p-7 hover:text-orange-500">
+          <Link to="/contact" className="hover:text-orange-500">
             <li>Contact</li>
           </Link>
-          <Link to="/cart" className="p-7 hover:text-orange-500">
-            <li data-testid="cart">Cart({cartItems.length})</li>
+          <Link to="/cart" className="hover:text-orange-500">
+            <li data-testid="cart">Cart ({cartItems.length})</li>
           </Link>
         </ul>
       </div>
 
-      <h1
-        data-testid="online-status"
-        className="m-6 h-6 w-6 rounded-full"
-        style={
-          isOnline ? { backgroundColor: "green" } : { backgroundColor: "red" }
-        }
-      ></h1>
-
-      {isLoggedInUser ? (
-        <button
-          className="m-2 hover:text-orange-500"
-          onClick={() => setIsLoggedInUser(false)}
-        >
-          Logout
-        </button>
-      ) : (
-        <button
-          className="m-2 hover:text-orange-500"
-          onClick={() => setIsLoggedInUser(true)}
-        >
-          Login
-        </button>
-      )}
+      <div className="flex items-center space-x-4">
+        <span
+          data-testid="online-status"
+          className={`h-4 w-4 rounded-full ${
+            isOnline ? "bg-green-500" : "bg-red-500"
+          }`}
+          title={isOnline ? "Online" : "Offline"}
+        ></span>
+        
+        {isLoggedInUser ? (
+          <button
+            className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition duration-200"
+            onClick={() => setIsLoggedInUser(false)}
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200"
+            onClick={() => setIsLoggedInUser(true)}
+          >
+            Login
+          </button>
+        )}
+      </div>
     </div>
   );
 };

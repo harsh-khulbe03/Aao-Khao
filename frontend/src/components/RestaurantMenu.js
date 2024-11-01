@@ -85,3 +85,52 @@ function getRestaurantInfo() {
 };
 
 export default RestaurantMenu;
+
+
+
+// import { useEffect, useState } from "react";
+// import { useParams } from "react-router-dom";
+// import { IMG_CDN_URL, SWIGGY_MENU_API_URL } from "../constant";
+// import Shimmer from "./Shimmer";
+// import { useDispatch } from "react-redux";
+// import { addItem } from "../utils/createSlice";
+// import RestaurantMenuItems from "./RestaurantMenuItems";
+
+// const apiUrl = process.env.REACT_APP_API_URL;
+
+// const RestaurantMenu = () => {
+//   const { resId } = useParams();
+//   const [restaurant, setRestaurant] = useState(null);
+//   const [menu, setMenu] = useState([]);
+//   const dispatch = useDispatch();
+
+//   const addFoodItem = (item) => {
+//     dispatch(addItem(item));
+//   };
+
+//   useEffect(() => {
+//     getRestaurantInfo();
+//   }, []);
+
+//   function getRestaurantInfo() {
+//     fetch(`${apiUrl}/api/menu/${resId}`).then((response) => {
+//       return response.json();
+//     }).then((res) => {
+//       const menuData = res.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.slice(1);
+//       setRestaurant(res?.data?.cards[2]?.card?.card?.info);
+//       setMenu(res.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.slice(1));
+//       console.log(menuData)
+//     })
+//   }
+
+
+//   return !restaurant ? (
+//         <Shimmer />
+//       ) : (
+//         <div></div>
+//       )
+
+
+// }
+
+// export default RestaurantMenu;

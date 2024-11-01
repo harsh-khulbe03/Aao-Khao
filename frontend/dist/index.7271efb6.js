@@ -27348,7 +27348,7 @@ const Title = ()=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
             "data-testid": "logo",
             src: (0, _oipJpgDefault.default),
             alt: "logo",
-            className: "w-24 h-24"
+            className: "w-36 h-24"
         }, void 0, false, {
             fileName: "src/components/Header.js",
             lineNumber: 14,
@@ -27365,55 +27365,74 @@ const Header = ()=>{
     const isOnline = (0, _useOnline.useOnline)();
     const [isLoggedInUser, setIsLoggedInUser] = (0, _react.useState)(false);
     const cartItems = (0, _reactRedux.useSelector)((store)=>store.cart.items);
-    console.log(cartItems);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "flex justify-between m-3 border-spacing-1 border-2 border-indigo-100",
+        className: "flex justify-between items-center p-4 border-b border-indigo-200 shadow-lg bg-white",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Title, {}, void 0, false, {
                 fileName: "src/components/Header.js",
-                lineNumber: 27,
+                lineNumber: 26,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
-                    className: "list-none flex",
+                    className: "flex space-x-8 text-lg font-semibold",
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
                             to: "/",
-                            className: "p-7 hover:text-orange-500",
+                            className: "hover:text-orange-500",
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                 children: "Home"
                             }, void 0, false, {
                                 fileName: "src/components/Header.js",
-                                lineNumber: 32,
+                                lineNumber: 31,
                                 columnNumber: 13
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/Header.js",
-                            lineNumber: 31,
+                            lineNumber: 30,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
                             to: "/about",
-                            className: "p-7 hover:text-orange-500",
+                            className: "hover:text-orange-500",
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                 children: "About"
                             }, void 0, false, {
                                 fileName: "src/components/Header.js",
-                                lineNumber: 36,
+                                lineNumber: 34,
                                 columnNumber: 13
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/Header.js",
-                            lineNumber: 35,
+                            lineNumber: 33,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
                             to: "/contact",
-                            className: "p-7 hover:text-orange-500",
+                            className: "hover:text-orange-500",
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
                                 children: "Contact"
                             }, void 0, false, {
+                                fileName: "src/components/Header.js",
+                                lineNumber: 37,
+                                columnNumber: 13
+                            }, undefined)
+                        }, void 0, false, {
+                            fileName: "src/components/Header.js",
+                            lineNumber: 36,
+                            columnNumber: 11
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
+                            to: "/cart",
+                            className: "hover:text-orange-500",
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                "data-testid": "cart",
+                                children: [
+                                    "Cart (",
+                                    cartItems.length,
+                                    ")"
+                                ]
+                            }, void 0, true, {
                                 fileName: "src/components/Header.js",
                                 lineNumber: 40,
                                 columnNumber: 13
@@ -27422,72 +27441,57 @@ const Header = ()=>{
                             fileName: "src/components/Header.js",
                             lineNumber: 39,
                             columnNumber: 11
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                            to: "/cart",
-                            className: "p-7 hover:text-orange-500",
-                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
-                                "data-testid": "cart",
-                                children: [
-                                    "Cart(",
-                                    cartItems.length,
-                                    ")"
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/Header.js",
-                                lineNumber: 43,
-                                columnNumber: 13
-                            }, undefined)
-                        }, void 0, false, {
-                            fileName: "src/components/Header.js",
-                            lineNumber: 42,
-                            columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/Header.js",
-                    lineNumber: 30,
+                    lineNumber: 29,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/Header.js",
-                lineNumber: 29,
+                lineNumber: 28,
                 columnNumber: 7
             }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                "data-testid": "online-status",
-                className: "m-6 h-6 w-6 rounded-full",
-                style: isOnline ? {
-                    backgroundColor: "green"
-                } : {
-                    backgroundColor: "red"
-                }
-            }, void 0, false, {
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "flex items-center space-x-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                        "data-testid": "online-status",
+                        className: `h-4 w-4 rounded-full ${isOnline ? "bg-green-500" : "bg-red-500"}`,
+                        title: isOnline ? "Online" : "Offline"
+                    }, void 0, false, {
+                        fileName: "src/components/Header.js",
+                        lineNumber: 46,
+                        columnNumber: 9
+                    }, undefined),
+                    isLoggedInUser ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: "px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition duration-200",
+                        onClick: ()=>setIsLoggedInUser(false),
+                        children: "Logout"
+                    }, void 0, false, {
+                        fileName: "src/components/Header.js",
+                        lineNumber: 55,
+                        columnNumber: 11
+                    }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        className: "px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200",
+                        onClick: ()=>setIsLoggedInUser(true),
+                        children: "Login"
+                    }, void 0, false, {
+                        fileName: "src/components/Header.js",
+                        lineNumber: 62,
+                        columnNumber: 11
+                    }, undefined)
+                ]
+            }, void 0, true, {
                 fileName: "src/components/Header.js",
-                lineNumber: 48,
+                lineNumber: 45,
                 columnNumber: 7
-            }, undefined),
-            isLoggedInUser ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                className: "m-2 hover:text-orange-500",
-                onClick: ()=>setIsLoggedInUser(false),
-                children: "Logout"
-            }, void 0, false, {
-                fileName: "src/components/Header.js",
-                lineNumber: 57,
-                columnNumber: 9
-            }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                className: "m-2 hover:text-orange-500",
-                onClick: ()=>setIsLoggedInUser(true),
-                children: "Login"
-            }, void 0, false, {
-                fileName: "src/components/Header.js",
-                lineNumber: 64,
-                columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/Header.js",
-        lineNumber: 26,
+        lineNumber: 25,
         columnNumber: 5
     }, undefined);
 };
@@ -46980,7 +46984,42 @@ _s(RestaurantMenu, "GYunbN9YTfAaak/CWtKBnNwDa5U=", false, function() {
     ];
 });
 _c = RestaurantMenu;
-exports.default = RestaurantMenu;
+exports.default = RestaurantMenu; // import { useEffect, useState } from "react";
+ // import { useParams } from "react-router-dom";
+ // import { IMG_CDN_URL, SWIGGY_MENU_API_URL } from "../constant";
+ // import Shimmer from "./Shimmer";
+ // import { useDispatch } from "react-redux";
+ // import { addItem } from "../utils/createSlice";
+ // import RestaurantMenuItems from "./RestaurantMenuItems";
+ // const apiUrl = process.env.REACT_APP_API_URL;
+ // const RestaurantMenu = () => {
+ //   const { resId } = useParams();
+ //   const [restaurant, setRestaurant] = useState(null);
+ //   const [menu, setMenu] = useState([]);
+ //   const dispatch = useDispatch();
+ //   const addFoodItem = (item) => {
+ //     dispatch(addItem(item));
+ //   };
+ //   useEffect(() => {
+ //     getRestaurantInfo();
+ //   }, []);
+ //   function getRestaurantInfo() {
+ //     fetch(`${apiUrl}/api/menu/${resId}`).then((response) => {
+ //       return response.json();
+ //     }).then((res) => {
+ //       const menuData = res.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.slice(1);
+ //       setRestaurant(res?.data?.cards[2]?.card?.card?.info);
+ //       setMenu(res.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.slice(1));
+ //       console.log(menuData)
+ //     })
+ //   }
+ //   return !restaurant ? (
+ //         <Shimmer />
+ //       ) : (
+ //         <div></div>
+ //       )
+ // }
+ // export default RestaurantMenu;
 var _c;
 $RefreshReg$(_c, "RestaurantMenu");
 
