@@ -3,16 +3,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 
-// const API_URL = process.env.NEXT_PUBLIC_API_URL
-// const apiUrl = process.env.NODE_ENV === "production" ? process.env.REACT_APP_API_URL : process.env.REACT_APP_API_URL;
-const apiUrl = process.env.REACT_APP_API_URL
-console.log(apiUrl);
+const apiUrl = process.env.REACT_APP_API_URL;
 function filterData(searchText, restaurants) {
   const filterdata = restaurants.filter((restaurant) =>
     restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
   );
-
-  console.log(filterdata);
   return filterdata;
 }
 
@@ -26,21 +21,23 @@ const Body = () => {
   }, []);
 
   async function getRestaurants() {
-    fetch(`${apiUrl}/api/restaurants`)  
-      .then(response =>
-        response.json())
-      .then(result => {
-        setAllRestaurants(result.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
-        setFilteredRestaurants(result.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+    fetch(`${apiUrl}/api/restaurants`)
+      .then((response) => response.json())
+      .then((result) => {
+        setAllRestaurants(
+          result.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants
+        );
+        setFilteredRestaurants(
+          result.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants
+        );
       })
 
-      .catch(error => console.log('Error fetching data: ', error))
+      .catch((error) => console.log("Error fetching data: ", error));
   }
 
   if (!allRestaurants) return null;
-
-  // if (filteredRestaurants.length === 0)
-  //   return <h2>No restaurants matches your Filter!!</h2>;
 
   return allRestaurants?.length === 0 ? (
     <Shimmer />

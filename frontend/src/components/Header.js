@@ -11,7 +11,7 @@ const loggedInUser = () => {
 
 const Title = () => (
   <a href="/">
-    <img data-testid="logo" src={Logo} alt="logo" className="w-36 h-24" />
+    <img data-testid="logo" src={Logo} alt="logo" className="w-36 h-24 rounded-2xl" />
   </a>
 );
 
