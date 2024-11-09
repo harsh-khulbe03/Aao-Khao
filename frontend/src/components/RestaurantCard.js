@@ -1,16 +1,7 @@
 import { IMG_CDN_URL } from "../constant";
 import Star from "../assets/images/Star.js";
 
-const RestaurantCard = ({
-  cloudinaryImageId,
-  name,
-  cuisines,
-  avgRating,
-  sla,
-  areaName,
-}) => {
-  // const {data} = restaurant;
-  // const {cloudinaryImageId,name,cuisines,avgRating} = data;
+const RestaurantCard = ({ cloudinaryImageId, name, cuisines, avgRating, sla, areaName }) => {
   return (
     <div className="w-72 p-3 m-2 cursor-pointer">
       <img

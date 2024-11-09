@@ -1,40 +1,79 @@
-import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 
 const apiUrl = process.env.REACT_APP_API_URL;
+
 function filterData(searchText, restaurants) {
-  const filterdata = restaurants.filter((restaurant) =>
+  return restaurants.filter((restaurant) =>
     restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
   );
-  return filterdata;
 }
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const elementRef = useRef(null);
+  const [page, setPage] = useState(9);
 
   useEffect(() => {
     getRestaurants();
   }, []);
 
-  async function getRestaurants() {
-    fetch(`${apiUrl}/api/restaurants`)
-      .then((response) => response.json())
-      .then((result) => {
-        setAllRestaurants(
-          result.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants
-        );
-        setFilteredRestaurants(
-          result.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants
-        );
-      })
+  function onIntersection(entries) {
+    const firstEntry = entries[0];
+    if (firstEntry.isIntersecting) {
+      fetchMoreRestaurants();
+    }
+  }
 
-      .catch((error) => console.log("Error fetching data: ", error));
+  useEffect(() => {
+    const observer = new IntersectionObserver(onIntersection);
+    if (observer && elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, [allRestaurants]);
+
+  async function getRestaurants() {
+    try {
+      const response = await fetch(`${apiUrl}/api/restaurants`);
+      const result = await response.json();
+      const restaurants =
+        result.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
+      setAllRestaurants(restaurants);
+      setFilteredRestaurants(restaurants);
+    } catch (error) {
+      console.log("Error fetching data: ", error);
+    }
+  }
+
+  async function fetchMoreRestaurants() {
+    try {
+      const response = await fetch(`${apiUrl}/api/update/${page}`);
+      const result = await response.json();
+      const newRestaurants =
+        result?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
+      setAllRestaurants((existingRestaurants) => [
+        ...existingRestaurants,
+        ...newRestaurants,
+      ]);
+      setFilteredRestaurants((existingRestaurants) => [
+        ...existingRestaurants,
+        ...newRestaurants,
+      ]);
+      setPage(page + 15);
+    } catch (error) {
+      console.error("Error fetching more restaurants:", error);
+    }
   }
 
   if (!allRestaurants) return null;
@@ -63,7 +102,7 @@ const Body = () => {
         </button>
       </div>
       <div className="flex justify-start flex-wrap w-[1380px] ml-32">
-        {filteredRestaurants?.map((restaurant) => {
+        {filteredRestaurants?.map((restaurant, index) => {
           return (
             <Link
               to={"/restaurant/" + restaurant.info.id}
@@ -74,6 +113,9 @@ const Body = () => {
             </Link>
           );
         })}
+      </div>
+      <div ref={elementRef} className="text-center">
+        <Shimmer />
       </div>
     </>
   );
