@@ -1,24 +1,34 @@
 import { IMG_CDN_URL } from "../constant";
-import { useDispatch } from "react-redux";
-import { addItem } from "../utils/createSlice";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useToastContext } from "../context/ToastContext";
+import { useCartContext } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 function MenuCard({ item }) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {showToast} = useToastContext();
-
-  const addFoodItem = (item) => {
-    dispatch(addItem(item));
-    showToast("bg-green-500","Item added to cart")
-  };
-
+  const { showToast } = useToastContext();
+  const { addToCart } = useCartContext();
+  const [quantity, setQuantity] = useState(0);
   const [showFullDescription, setShowFullDescription] = useState(false);
 
   const toggleDescription = () => {
     setShowFullDescription(!showFullDescription);
+  };
+
+  const addFoodItem = async (item) => {
+    const { id, name, imageId } = item?.card?.info;
+    const description = item?.card?.info?.description ?? "";
+    const price = item?.card?.info?.price ?? item?.card?.info?.defaultPrice;
+    const updatedQuantity = await addToCart({
+      itemId:id,
+      name,
+      description,
+      imageId,
+      price,
+    });
+    setQuantity(updatedQuantity);
+    showToast("bg-green-500", "Item added to cart");
+    navigate("/cart");
   };
 
   const price = item?.card?.info?.price ?? item?.card?.info?.defaultPrice;
@@ -32,24 +42,9 @@ function MenuCard({ item }) {
         <span className="text-black font-bold">
           ₹{typeof price === "string" ? Number(price) / 100 : price / 100}
         </span>
-        <div className="flex items-center text-sm text-green-500 gap-1">
-          {item?.card?.info?.ratings?.aggregatedRating?.rating && (
-            <span style={{ color: "#126d44" }}>
-              <i class="fa-solid fa-star"></i>
-            </span>
-          )}
-          <span>
-            {item?.card?.info?.ratings?.aggregatedRating?.rating
-              ? item?.card?.info?.ratings?.aggregatedRating?.rating
-              : null}
-          </span>
-          {item?.card?.info?.ratings?.aggregatedRating?.ratingCountV2 ? (
-            <span className="text-gray-400">
-              ({item?.card?.info?.ratings?.aggregatedRating?.ratingCountV2})
-            </span>
-          ) : null}
-        </div>
-        {item?.card?.info?.description ? (
+
+        {/* Description Handling */}
+        {item?.card?.info?.description && (
           <div className="text-gray-500 text-sm mb-2 w-[600px]">
             {item?.card?.info?.description.length < 200 ||
             showFullDescription ? (
@@ -65,16 +60,8 @@ function MenuCard({ item }) {
                 </button>
               </span>
             )}
-            {showFullDescription && (
-              <button
-                onClick={toggleDescription}
-                className="text-gray-600 font-bold ml-2"
-              >
-                Show less
-              </button>
-            )}
           </div>
-        ) : null}
+        )}
       </div>
 
       <div className="relative inline-block">
@@ -85,15 +72,15 @@ function MenuCard({ item }) {
           />
         )}
 
-        <button
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white text-green-500 text-xl font-black border border-1 border-gray-400 py-2 px-9 rounded-md"
-          onClick={() =>{
-            addFoodItem(item);
-            navigate("/cart")
-          }}
-        >
-          ADD
-        </button>
+        {/* Quantity Buttons */}
+        {quantity === 0 ? (
+          <button
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white text-green-500 text-xl font-black border border-1 border-gray-400 py-2 px-9 rounded-md"
+            onClick={() => addFoodItem(item)}
+          >
+            ADD
+          </button>
+        ): <></>}
       </div>
     </div>
   );

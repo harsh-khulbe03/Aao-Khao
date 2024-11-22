@@ -11,18 +11,17 @@ import Register from "./components/Register";
 import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import "../custom.css";
-import { Provider } from "react-redux";
-import store from "./utils/store";
 import Cart from "./components/Cart";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ToastProvider } from "./context/ToastContext";
+import { CartProvider } from "./context/CartContext";
 
 const AppLayout = () => (
-  <Provider store={store}>
+  <div className="bg-orange-50 min-h-screen">
     <Header />
     <Outlet />
     <Footer />
-  </Provider>
+  </div>
 );
 
 const appRouter = createBrowserRouter([
@@ -53,6 +52,8 @@ const appRouter = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ToastProvider>
-    <RouterProvider router={appRouter} />
+    <CartProvider>
+      <RouterProvider router={appRouter} />
+    </CartProvider>
   </ToastProvider>
 );

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import { useNavigate } from "react-router-dom";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -17,6 +18,7 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const elementRef = useRef(null);
   const [page, setPage] = useState(9);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getRestaurants();
@@ -47,6 +49,9 @@ const Body = () => {
         headers:{'authorization': `Bearer ${localStorage.getItem("token")}`},
       });
       const result = await response.json();
+      if(result.message === "User is not authorized") {
+        navigate('/login');
+      }
       const restaurants =
         result.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants;
@@ -83,7 +88,7 @@ const Body = () => {
   return allRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
-    <>
+    <div className="bg-orange-50">
       <div className="flex mt-7 mb-7 items-center">
         <input
           type="text"
@@ -119,7 +124,7 @@ const Body = () => {
       <div ref={elementRef} className="text-center">
         <Shimmer />
       </div>
-    </>
+    </div>
   );
 };
 

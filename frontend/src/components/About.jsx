@@ -8,7 +8,7 @@ const About = () => {
           Welcome to AaoKhao
         </h1>
         <p className="text-black text-xl p-5 m-5">
-          AaoKhao is a food delivery web application which delivers you fresh food and provides
+          AaoKhao is a food ordering web application which delivers you fresh food and provides
           fastest food delivery.
         </p>
       </div>

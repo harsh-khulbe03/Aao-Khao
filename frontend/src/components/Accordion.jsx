@@ -3,7 +3,6 @@ import MenuCard from "./MenuCard";
 
 function Accordion({ title, items }) {
   const [isActive, setIsActive] = useState(false);
-  console.log(items[0]?.card?.info?.ratings?.aggregatedRating?.rating);
 
   return (
     <div className="border-b border-gray-300">

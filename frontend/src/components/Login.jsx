@@ -42,7 +42,7 @@ const Login = () => {
   return (
     <>
       <form
-        className="h-1/3 w-1/3 mx-auto my-16 p-10 bg-slate-100 flex flex-col gap-12 rounded-2xl"
+        className="h-1/3 w-1/3 mx-auto mt-40 mb-60 p-10 bg-white flex flex-col gap-12 rounded-2xl border border-1 border-black"
         onSubmit={handleSubmit}
       >
         <h1 className="text-3xl font-black text-center text-orange-400">Login</h1>
@@ -50,7 +50,7 @@ const Login = () => {
           <div className="flex">
             <input
               type="text"
-              className="px-16 py-2 outline-none"
+              className="px-16 py-2 outline-none rounded-md border border-1 border-black"
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter you Email"
               value={email}
@@ -59,7 +59,7 @@ const Login = () => {
           <div className="flex">
             <input
               type="text"
-              className="px-16 py-2 outline-none"
+              className="px-16 py-2 outline-none rounded-md border border-1 border-black"
               onChange={(e) =>   setPassword(e.target.value)}
               placeholder="Enter your Password"
               value={password}  

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function useToast() {
   const [toast, setToast] = useState({
@@ -9,7 +9,7 @@ function useToast() {
 
   const showToast = (color, message) => {
     setToast({ visible: true, color, text: message });
-    setTimeout(() => setToast({ visible: false, color: "", text: "" }), 3000);
+    setTimeout(() => setToast({ visible: false, color: "", text: "" }), 2000);
   };
 
   return {
