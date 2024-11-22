@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import React, {useState} from "react";
 import { useToastContext } from "../context/ToastContext";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,7 +13,7 @@ const Login = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:3002/api/login", {
+      const res = await fetch(`${apiUrl}/api/login`, {
         method: "POST",
         body: JSON.stringify({ email, password }),
         headers:{
