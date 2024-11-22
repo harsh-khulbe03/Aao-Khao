@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import userRouter from "./routes/user.route.js";
-import restaurantRouter from "./routes/restaurant.route.js";
-import cartRouter from "./routes/cart.route.js";
+import userRouter from "../routes/user.route.js";
+import restaurantRouter from "../routes/restaurant.route.js";
+import cartRouter from "../routes/cart.route.js";
 const app = express();
 dotenv.config();
-import dbConnect from "./db/db.js";
+import dbConnect from "../db/db.js";
 const port = process.env.PORT || 3002;
 
 app.use(
