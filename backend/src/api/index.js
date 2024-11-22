@@ -19,6 +19,10 @@ app.use(express.json())
 
 dbConnect();
 
+app.get("/",(req,res) => {
+  res.send("hELLO");
+})
+
 app.use("/api", userRouter);
 app.use("/api", restaurantRouter);
 app.use("/api",cartRouter);
