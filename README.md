@@ -60,7 +60,7 @@ Aaokhao is a modern food ordering web application where users can browse restaur
 
     ```bash
     cd frontend
-    npm start
+    npm run dev
     ```
 
 4. **Run Backend (Proxy Server)**:
