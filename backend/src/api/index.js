@@ -11,21 +11,21 @@ const port = process.env.PORT || 3002;
 
 app.use(
   cors({
-    origin: ["https://aaokhao-frontend.vercel.app"],
+    origin: ["https://aaokhao-frontend.vercel.app", "http://localhost:5173"],
   })
 );
 
-app.use(express.json())
+app.use(express.json());
 
 dbConnect();
 
-app.get("/",(req,res) => {
-  res.send("hELLO");
-})
+app.get("/", (_, res) => {
+  res.send("HELLO");
+});
 
 app.use("/api", userRouter);
 app.use("/api", restaurantRouter);
-app.use("/api",cartRouter);
+app.use("/api", cartRouter);
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);

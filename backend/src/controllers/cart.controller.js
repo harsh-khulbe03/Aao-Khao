@@ -104,7 +104,6 @@ export async function increaseItemQuantity(req, res) {
       quantity: cart.cartItems[itemIndex].quantity,
     });
   } catch (error) {
-    z;
     console.error("Error removing item from cart:", error);
     return res.status(500).json({ message: "Internal server error" });
   }
@@ -143,7 +142,7 @@ export async function decreaseItemQuantity(req, res) {
 
     return res.status(200).json({
       message: "Item removed from cart",
-      quantity: cart.cartItems[itemIndex].quantity,
+      quantity: cart?.cartItems[itemIndex]?.quantity,
     });
   } catch (error) {
     console.error("Error removing item from cart:", error);
