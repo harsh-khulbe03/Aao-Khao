@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCartContext } from "../context/CartContext";
-import Logo from "../assets/images/cart.png";
 import { useToastContext } from "../context/ToastContext";
-import { clearCart } from "../../../backend/src/controllers/cart.controller";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const keyId = import.meta.env.VITE_RAZORPAY_ID_KEY;
