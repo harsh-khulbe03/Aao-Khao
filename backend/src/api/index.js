@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import userRouter from "../routes/user.route.js";
 import restaurantRouter from "../routes/restaurant.route.js";
 import cartRouter from "../routes/cart.route.js";
+import paymentRouter from "../routes/payment.route.js";
 const app = express();
 dotenv.config();
 import dbConnect from "../db/db.js";
@@ -26,6 +27,7 @@ app.get("/", (_, res) => {
 app.use("/api", userRouter);
 app.use("/api", restaurantRouter);
 app.use("/api", cartRouter);
+app.use("/api/payment",paymentRouter);
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
