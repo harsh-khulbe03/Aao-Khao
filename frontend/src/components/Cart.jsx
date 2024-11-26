@@ -60,7 +60,7 @@ const Cart = () => {
           </div>
           <div className="flex justify-between font-bold text-gray-800">
             <span>Total:</span>
-            <span>₹{Number(totalPrice + 40).toFixed(2)}</span>
+            <span>₹{Number(totalPrice+40).toFixed(2)}</span>
           </div>
         </div>
         <button

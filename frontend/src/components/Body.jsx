@@ -45,16 +45,20 @@ const Body = () => {
 
   async function getRestaurants() {
     try {
-      const response = await fetch(`${apiUrl}/api/restaurants`,{
-        headers:{'authorization': `Bearer ${localStorage.getItem("token")}`},
+      const response = await fetch(`${apiUrl}/api/restaurants`, {
+        headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       const result = await response.json();
-      if(result.message === "User is not authorized") {
+
+      if (result.message === "User is not authorized") {
         navigate('/login');
+        return; // Exit the function
       }
+
       const restaurants =
         result.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
+          ?.restaurants || [];
+      
       setAllRestaurants(restaurants);
       setFilteredRestaurants(restaurants);
     } catch (error) {
@@ -68,7 +72,7 @@ const Body = () => {
       const result = await response.json();
       const newRestaurants =
         result?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
+          ?.restaurants || [];
       setAllRestaurants((existingRestaurants) => [
         ...existingRestaurants,
         ...newRestaurants,
