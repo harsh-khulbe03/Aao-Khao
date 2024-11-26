@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useCartContext } from "../context/CartContext";
 import Logo from "../assets/images/cart.png";
 import { useToastContext } from "../context/ToastContext";
+import { clearCart } from "../../../backend/src/controllers/cart.controller";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const keyId = import.meta.env.VITE_RAZORPAY_ID_KEY;
@@ -22,6 +23,22 @@ const CheckoutPage = () => {
   });
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const [orderId, setOrderId] = useState("");
+
+  async function clearCart() {
+    try {
+      const response = await fetch(`${apiUrl}/api/clearCart`, {
+        method: "DELETE",
+        headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      if (!response.ok) {
+        showToast("bg-red-500", "Unable to clear the cart...");
+      }
+
+      await fetchCartItems();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -68,6 +85,7 @@ const CheckoutPage = () => {
           const data = await response.json();
           if (data) {
             setIsOrderPlaced(true);
+            clearCart();
             showToast("bg-green-500", "Payment Successful...");
           }
         } catch (error) {
@@ -99,11 +117,15 @@ const CheckoutPage = () => {
   };
 
   return isOrderPlaced ? (
-    <div className="flex flex-col justify-center items-center gap-4 mt-28">
-      <img src={Logo} className="h-40 w-40" alt="cart-image" />
+    <div className="flex flex-col justify-center items-center gap-4 mt-28 mb-72">
       <h1 className="text-2xl font-black text-green-600">
         Order Placed Successfully!
       </h1>
+      <div class="relative inline-block  p-10 rounded-full border-4 border-green-500 flex items-center justify-center animate-checkmark">
+        <div class="absolute w-[4px] h-12 bg-green-500 origin-bottom-left transform scale-y-0 rotate-45 animate-stem"></div>
+        <div class="absolute w-[4px] h-8 bg-green-500 origin-top-left transform scale-y-0 rotate-[-45deg] top-[2.8rem] left-[1.0rem] animate-kick"></div>
+      </div>
+
       <p className="text-gray-500">
         Thank you for shopping with us. Your order ID is #{orderId}
       </p>
