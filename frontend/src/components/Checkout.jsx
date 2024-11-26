@@ -72,7 +72,10 @@ const CheckoutPage = () => {
         try {
           const response = await fetch(`${apiUrl}/api/payment/verify`, {
             method: "POST",
-            headers: { "Content-type": "application/json" },
+            headers: {
+              "Content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
             body: JSON.stringify(res),
           });
 
@@ -103,7 +106,10 @@ const CheckoutPage = () => {
     try {
       const response = await fetch(`${apiUrl}/api/payment/orders`, {
         method: "POST",
-        headers: { "Content-type": "application/json" },
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
         body: JSON.stringify({ amount: Number(totalPrice) }),
       });
       const result = await response.json();
