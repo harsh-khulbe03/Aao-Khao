@@ -2,3 +2,5 @@
 /dist
 .postcssrc
 /coverage
+.env.development
+.env.production

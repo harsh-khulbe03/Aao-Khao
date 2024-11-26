@@ -55,23 +55,18 @@ const CheckoutPage = () => {
       order_id: data.id,
       handler: async (res) => {
         try {
-          console.log("console", res);
-          console.log("handler calls");
           const response = await fetch(`${apiUrl}/api/payment/verify`, {
             method: "POST",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(res),
           });
-          console.log(response);
 
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
 
           const data = await response.json();
-          console.log("Verification response:", data);
           if (data) {
-            console.log("Payment success");
             setIsOrderPlaced(true);
             showToast("bg-green-500", "Payment Successful...");
           }
@@ -96,7 +91,6 @@ const CheckoutPage = () => {
         body: JSON.stringify({ amount: Number(totalPrice) }),
       });
       const result = await response.json();
-      console.log("result :", result);
       const data = result.data;
       initPay(data);
     } catch (error) {
