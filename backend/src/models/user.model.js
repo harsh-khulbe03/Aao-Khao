@@ -10,9 +10,24 @@ const userSchema = new mongoose.Schema({
         required:true
     },
     password: {
-        type:String,
+        type: String,
         required:true,
-    }
+    },
+    phoneNo: {
+        type: String,
+    },
+    address: {
+        type: String,
+    },
+    city: {
+        type: String,
+    },
+    state: {
+        type: String,
+    },
+    zip: {
+        type: String,
+    },
 });
 
 const User = new mongoose.model("User",userSchema);

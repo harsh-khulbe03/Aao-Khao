@@ -20,12 +20,12 @@ userRouter.post("/login", loginUser);
 userRouter.get("/users", getAllUsers);
 
 // To get a single user
-userRouter.get("/user/:userId", getAParticularUser);
+userRouter.get("/user", authenticate, getAParticularUser);
 
 //Update a user
-userRouter.put("/user/:userId", authenticate, updateUser);
+userRouter.put("/user/update", authenticate, updateUser);
 
 // Delete a user
-userRouter.delete("/user/:userId", deleteUser);
+userRouter.delete("/user/remove", authenticate, deleteUser);
 
 export default userRouter;
