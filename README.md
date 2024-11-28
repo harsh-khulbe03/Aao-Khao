@@ -6,8 +6,6 @@ Aaokhao is a modern food ordering web application where users can browse restaur
 
 - [Features](#features)
 - [How to Use](#how-to-use)
-- [Cart Functionality](#cart-functionality)
-- [Payment Functionality](#payment-functionality)
 - [Technologies](#technologies)
 - [Installation and Setup](#installation-and-setup)
 - [Acknowledgments](#acknowledgments)
