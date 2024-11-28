@@ -9,7 +9,6 @@ export async function registerUser(req, res) {
   try {
     const { username, email, password } = req.body;
     const userExists = await User.findOne({ email });
-    console.log(userExists);
     if (userExists) {
       return res.status(409).json({
         message: "User already exists",
@@ -33,6 +32,11 @@ export async function registerUser(req, res) {
 export async function loginUser(req, res) {
   try {
     const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "Enter the required credentials...",
+      });
+    }
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -66,7 +70,7 @@ export async function getAllUsers(_, res) {
     const users = await User.find();
     if (users.length === 0) {
       return res.status(404).json({
-        message:"No users found",
+        message: "No users found",
       });
     }
     return res.status(200).json({
@@ -80,7 +84,7 @@ export async function getAllUsers(_, res) {
 
 export async function getAParticularUser(req, res) {
   try {
-    const { userId } = req.params;
+    const userId = req.user._id;
     const user = await User.findOne({ _id: userId });
     if (!user) {
       return res.status(404).json({
@@ -98,14 +102,25 @@ export async function getAParticularUser(req, res) {
 
 export async function updateUser(req, res) {
   try {
-    const { userId } = req.params;
-    const { username, email, password } = req.body;
+    const userId = req.user._id;
+    const { username, email, password, phoneNo, address, city, state, zip } =
+      req.body;
+    if (!email && !phoneNo && !address && !city && !state && !zip) {
+      return res.status(400).json({
+        message: "Enter all the required information",
+      });
+    }
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       {
         username,
         email,
         password,
+        phoneNo,
+        address,
+        city,
+        state,
+        zip,
       },
       { new: true }
     );
@@ -125,7 +140,7 @@ export async function updateUser(req, res) {
 
 export async function deleteUser(req, res) {
   try {
-    const { userId } = req.params;
+    const userId = req.user._id;
     const deletedUser = await User.findByIdAndDelete(userId);
     if (!deletedUser) {
       return res.status(400).json({
