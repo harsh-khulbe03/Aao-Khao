@@ -150,6 +150,40 @@ export async function decreaseItemQuantity(req, res) {
   }
 }
 
+export async function removeItem(req, res) {
+  try {
+    const userId = req.user._id;
+    const { itemId } = req.body;
+    const cart = await Cart.findOne({ userId });
+
+    if (!cart) {
+      return res.status(404).json({
+        message: "Cart not found",
+      });
+    }
+
+    const itemIndex = cart.cartItems.findIndex(
+      (item) => item.itemId === itemId
+    );
+
+    if (itemIndex === -1) {
+      return res.status(404).json({
+        message: "Item not found in cart",
+      });
+    }
+
+    const [removedItem] = cart.cartItems.splice(itemIndex, 1);
+    await cart.save();
+
+    return res.status(200).json({
+      message: "CartItem removed from the cart successfully",
+      cartItem: removedItem,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function clearCart(req, res) {
   try {
     const userId = req.user._id;

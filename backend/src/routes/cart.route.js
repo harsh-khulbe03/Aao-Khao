@@ -5,6 +5,7 @@ import {
   clearCart,
   decreaseItemQuantity,
   increaseItemQuantity,
+  removeItem,
 } from "../controllers/cart.controller.js";
 import authenticate from "../middlewares/user.middleware.js";
 const cartRouter = express.Router();
@@ -20,6 +21,9 @@ cartRouter.post("/increaseQuantity", authenticate, increaseItemQuantity);
 
 //Decrease quantity of the item
 cartRouter.delete("/decreaseQuantity", authenticate, decreaseItemQuantity);
+
+// Remove a particular cart item
+cartRouter.delete("/removeItem", authenticate, removeItem);
 
 //Clear cart
 cartRouter.delete("/clearCart", authenticate, clearCart);
