@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import { useToastContext } from "../context/ToastContext";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -7,6 +8,7 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { showToast } = useToastContext();
 
   const navigate = useNavigate();
   async function handleSubmit(e) {
@@ -21,8 +23,7 @@ const Register = () => {
       });
 
       if (res.ok) {
-        const data = await res.json();
-        console.log(data);
+        showToast("bg-green-500", "User registered successfully");
         navigate("/login");
       }
     } catch (error) {
