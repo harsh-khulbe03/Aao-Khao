@@ -12,8 +12,13 @@ const CartItem = ({
   quantity: initialQuantity,
 }) => {
   const [quantity, setQuantity] = useState(initialQuantity);
-  const { fetchCartItems, increaseQuantity, decreaseQuantity, cartLength } =
-    useCartContext();
+  const {
+    fetchCartItems,
+    increaseQuantity,
+    decreaseQuantity,
+    removeCartItem,
+    cartLength,
+  } = useCartContext();
 
   const handleIncrease = async () => {
     const updatedQuantity = await increaseQuantity({ itemId });
@@ -23,6 +28,11 @@ const CartItem = ({
   const handleDecrease = async () => {
     const updatedQuantity = await decreaseQuantity({ itemId });
     setQuantity(updatedQuantity);
+    await fetchCartItems();
+  };
+
+  const removeItem = async (itemId) => {
+    await removeCartItem(itemId);
     await fetchCartItems();
   };
 
@@ -64,20 +74,31 @@ const CartItem = ({
             </div>
           </div>
 
-          <div className="flex items-center space-x-3">
-            <button
-              onClick={handleDecrease}
-              className="px-3 py-1 bg-gray-200 text-black font-bold rounded-lg hover:bg-gray-300 transition"
-            >
-              -
-            </button>
-            <span className="text-black font-bold">{quantity}</span>
-            <button
-              onClick={handleIncrease}
-              className="px-3 py-1 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600 transition"
-            >
-              +
-            </button>
+          <div className="flex flex-col gap-3 p-4">
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={handleDecrease}
+                className="px-3 py-1 bg-gray-200 text-black font-bold rounded-lg hover:bg-gray-300 transition"
+              >
+                -
+              </button>
+              <span className="text-black font-bold">{quantity}</span>
+              <button
+                onClick={handleIncrease}
+                className="px-3 py-1 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600 transition"
+              >
+                +
+              </button>
+            </div>
+
+            <div>
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                onClick={() => removeItem(itemId)}
+              >
+                Remove
+              </button>
+            </div>
           </div>
         </div>
       )}

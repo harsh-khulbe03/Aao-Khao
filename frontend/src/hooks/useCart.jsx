@@ -1,8 +1,9 @@
 import { useState } from "react";
-
+import { useToastContext } from "../context/ToastContext";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const useCart = () => {
+  const { showToast } = useToastContext();
   const [cartLength, setCartLength] = useState(0);
   const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +61,6 @@ const useCart = () => {
 
   async function decreaseQuantity(item) {
     const { itemId } = item;
-    console.log("Reducing quantity for item:", itemId);
     setIsLoading(true);
 
     const response = await fetch(`${apiUrl}/api/decreaseQuantity`, {
@@ -72,7 +72,6 @@ const useCart = () => {
       },
     });
     const data = await response.json();
-    console.log("API response for decreaseQuantity:", data);
 
     if (data?.quantity === 0) {
       setCartLength((prev) => prev - 1);
@@ -84,11 +83,29 @@ const useCart = () => {
     return data?.quantity;
   }
 
+  async function removeCartItem(itemId) {
+    const response = await fetch(`${apiUrl}/api/removeItem`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({ itemId }),
+    });
+
+    if (!response.ok) {
+      showToast("Can't remove the item from the cart");
+      return;
+    }
+    showToast("bg-green-500", "Item removed from the cart");
+  }
+
   return {
     fetchCartItems,
     addToCart,
     increaseQuantity,
     decreaseQuantity,
+    removeCartItem,
     cartLength,
     cartItems,
     isLoading,
