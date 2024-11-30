@@ -20,7 +20,7 @@ function MenuCard({ item }) {
     const description = item?.card?.info?.description ?? "";
     const price = item?.card?.info?.price ?? item?.card?.info?.defaultPrice;
     const updatedQuantity = await addToCart({
-      itemId:id,
+      itemId: id,
       name,
       description,
       imageId,
@@ -75,12 +75,18 @@ function MenuCard({ item }) {
         {/* Quantity Buttons */}
         {quantity === 0 ? (
           <button
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white text-green-500 text-xl font-black border border-1 border-gray-400 py-2 px-9 rounded-md"
+            className={
+              item?.card?.info?.imageId
+                ? "absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white text-green-500 text-xl font-black border border-1 border-gray-400 py-2 px-9 rounded-md"
+                : " bg-white text-green-500 text-xl font-black border border-1 border-gray-400 py-2 px-9 rounded-md mr-10"
+            }
             onClick={() => addFoodItem(item)}
           >
             ADD
           </button>
-        ): <></>}
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
