@@ -58,6 +58,9 @@ const Header = () => {
             <Link to="/cart" className="text-orange-400">
               <li data-testid="cart">Cart ({updatedCartLength})</li>
             </Link>
+            <Link to="/order" className="text-orange-400">
+              <li>My Orders</li>
+            </Link>
           </ul>
         </div>
       ) : null}
