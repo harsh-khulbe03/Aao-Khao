@@ -16,6 +16,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { ToastProvider } from "./context/ToastContext";
 import { CartProvider } from "./context/CartContext";
 import Checkout from "./components/Checkout";
+import Orders from "./components/Orders";
 
 const AppLayout = () => (
   <div className="bg-orange-50 min-h-screen">
@@ -47,6 +48,7 @@ const appRouter = createBrowserRouter([
       { path: "/restaurant/:resId", element: <RestaurantMenu /> },
       { path: "/cart", element: <Cart /> },
       { path: "/checkout", element: <Checkout /> },
+      { path: "/order", element: <Orders /> }
     ],
   },
 ]);

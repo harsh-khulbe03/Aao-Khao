@@ -30,6 +30,25 @@ const CheckoutPage = () => {
   });
   const [isDeliveryInfoSaved, setIsDeliveryInfoSaved] = useState(false);
 
+  async function createOrder() {
+    const response = await fetch(`${apiUrl}/api/create-order`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        orderItems: cartItems,
+      }),
+    });
+
+    if(!response.ok) {
+      showToast("bg-red-500","Can't create the order");
+    }
+
+    showToast("bg-green-500", "Order created successfully");
+  }
+
   async function clearCart() {
     try {
       const response = await fetch(`${apiUrl}/api/clearCart`, {
@@ -151,7 +170,7 @@ const CheckoutPage = () => {
     }
   };
 
-  const initPay = (data) => {
+  const initPay = async (data) => {
     setOrderId(data.id);
     const options = {
       key: keyId,
@@ -178,6 +197,7 @@ const CheckoutPage = () => {
             setIsOrderPlaced(true);
             clearCart();
             showToast("bg-green-500", "Payment Successful...");
+            createOrder();
           }
         } catch (error) {
           console.log("Error verifying payment:", error);
@@ -233,6 +253,14 @@ const CheckoutPage = () => {
       <p className="text-gray-500">
         Thank you for shopping with us. Your order ID is #{orderId}
       </p>
+
+      <button
+        className="px-5 py-2 bg-orange-500 text-white rounded"
+        onClick={() => navigate("/order")}
+      >
+        View Orders
+      </button>
+
       <button
         className="px-5 py-2 bg-orange-500 text-white rounded"
         onClick={() => navigate("/")}
@@ -340,7 +368,10 @@ const CheckoutPage = () => {
             <p>ZIP: {deliveryInfo.zip}</p>
           </div>
           <div>
-            <button className="bg-white text-blue-500 font-bold border border-1 border-blue-400 px-4 py-2 rounded-lg" onClick={() => setIsDeliveryInfoSaved(false)}>
+            <button
+              className="bg-white text-blue-500 font-bold border border-1 border-blue-400 px-4 py-2 rounded-lg"
+              onClick={() => setIsDeliveryInfoSaved(false)}
+            >
               change
             </button>
           </div>
