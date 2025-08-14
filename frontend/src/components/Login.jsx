@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import React, {useState} from "react";
+import { useState } from "react";
 import { useToastContext } from "../context/ToastContext";
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -7,7 +7,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {showToast} = useToastContext();
+  const { showToast } = useToastContext();
 
   const navigate = useNavigate();
   async function handleSubmit(e) {
@@ -16,9 +16,9 @@ const Login = () => {
       const res = await fetch(`${apiUrl}/api/login`, {
         method: "POST",
         body: JSON.stringify({ email, password }),
-        headers:{
-          "Content-Type":"application/json",
-        }
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
       if (res.ok) {
@@ -26,7 +26,7 @@ const Login = () => {
         const token = data?.token;
         if (token) {
           localStorage.setItem("token", token);
-          showToast("bg-green-500","Login Successful...");
+          showToast("bg-green-500", "Login Successful...");
           navigate("/");
         } else {
           console.log("No token provided");
@@ -34,7 +34,7 @@ const Login = () => {
       } else {
         const error = await res.json();
         console.log("error");
-        showToast("bg-red-400",error.message);
+        showToast("bg-red-400", error.message);
       }
     } catch (error) {
       console.log(error);
@@ -43,39 +43,58 @@ const Login = () => {
 
   return (
     <>
-      <form
-        className="h-1/3 w-1/3 mx-auto mt-40 mb-60 p-10 bg-white flex flex-col gap-12 rounded-2xl border border-1 border-black"
-        onSubmit={handleSubmit}
-      >
-        <h1 className="text-3xl font-black text-center text-orange-400">Login</h1>
-        <div className="flex flex-col justify-around gap-10">
-          <div className="flex">
-            <input
-              type="text"
-              className="px-16 py-2 outline-none rounded-md border border-1 border-black"
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter you Email"
-              value={email}
-            />
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full bg-white px-8 py-14 rounded-xl shadow-lg">
+          <div className="text-center">
+            <h2 className="text-3xl font-extrabold text-orange-500">Login</h2>
           </div>
-          <div className="flex">
-            <input
-              type="text"
-              className="px-16 py-2 outline-none rounded-md border border-1 border-black"
-              onChange={(e) =>   setPassword(e.target.value)}
-              placeholder="Enter your Password"
-              value={password}  
-            />
-          </div>
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+            <div className="rounded-md shadow-sm space-y-4">
+              <div>
+                <label htmlFor="email" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-orange-500 focus:border-orange-500 focus:z-10 sm:text-sm"
+                  placeholder="Email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="password" className="sr-only">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-orange-500 focus:border-orange-500 focus:z-10 sm:text-sm"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+            </div>
 
-          <button
-            className="px-10 py-2 text-xl font-black bg-orange-400 text-white rounded-lg"
-            type="submit"
-          >
-            Login
-          </button>
+            <div>
+              <button
+                type="submit"
+                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors duration-200"
+              >
+                Sign in
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </>
   );
 };

@@ -51,14 +51,14 @@ const Body = () => {
       const result = await response.json();
 
       if (result.message === "User is not authorized") {
-        navigate('/login');
+        navigate("/login");
         return; // Exit the function
       }
 
       const restaurants =
         result.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants || [];
-      
+
       setAllRestaurants(restaurants);
       setFilteredRestaurants(restaurants);
     } catch (error) {
@@ -112,8 +112,8 @@ const Body = () => {
           <i className="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
-      <div className="flex justify-start flex-wrap w-[1380px] ml-32">
-        {filteredRestaurants?.map((restaurant, index) => {
+      <div className="flex justify-start flex-wrap max-w-7xl mx-auto">
+        {filteredRestaurants?.map((restaurant) => {
           return (
             <Link
               to={"/restaurant/" + restaurant.info.id}

@@ -11,65 +11,89 @@ const ContactSchema = Yup.object().shape({
 const Contact = () => {
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     console.log(values);
-    resetForm();
-    setSubmitting(false);
+    setTimeout(() => {
+      resetForm();
+      setSubmitting(false);
+      alert("Thank you for your message! We'll get back to you soon.");
+    }, 1000);
   };
 
   return (
-    <div className="max-w-lg mx-auto p-5 shadow-black bg-slate-100 mt-32 mb-48 rounded-xl">
-      <h1 className="text-center mb-5 text-xl font-black">Contact Us</h1>
+    <div className="max-w-md mx-auto p-6 md:p-8 bg-white rounded-xl shadow-lg mt-16 mb-20">
+      <h1 className="text-2xl md:text-3xl font-bold text-center mb-8 text-orange-500">
+        Get In Touch
+      </h1>
+      
       <Formik
         initialValues={{ name: "", email: "", message: "" }}
         validationSchema={ContactSchema}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
-          <Form className="flex flex-col">
-            <div className="mb-2">
-              <label htmlFor="name" className="font-black">
-                Name:
+          <Form className="space-y-6">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                Your Name
               </label>
               <Field
                 type="text"
                 id="name"
                 name="name"
-                className="w-[470px] px-3 py-2 rounded border border-slate-200 outline-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-200"
+                placeholder="John Doe"
               />
               <ErrorMessage
                 name="name"
                 component="div"
-                className="text-red-400 mt-1"
+                className="text-sm text-red-500 mt-1"
               />
             </div>
 
-            <div className="mb-5">
-              <label htmlFor="email" className="font-black">Email:</label>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                Email Address
+              </label>
               <Field
                 type="email"
                 id="email"
                 name="email"
-                className="w-[470px] px-3 py-2 rounded border border-slate-200 outline-none"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-200"
+                placeholder="your@email.com"
               />
-              <ErrorMessage name="email" component="div" className="text-red-400 mt-1" />
+              <ErrorMessage 
+                name="email" 
+                component="div" 
+                className="text-sm text-red-500 mt-1" 
+              />
             </div>
 
-            <div className="mb-5">
-              <label htmlFor="message" className="font-black">Message:</label>
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                Your Message
+              </label>
               <Field
                 as="textarea"
                 id="message"
-                name="message"  
-                className="w-[470px] p-3 rounded border border-slate-200 outline-none"
+                name="message"
+                rows="5"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-200"
+                placeholder="How can we help you?"
               />
-              <ErrorMessage name="message" component="div" className="text-red-400 mt-1" />
+              <ErrorMessage 
+                name="message" 
+                component="div" 
+                className="text-sm text-red-500 mt-1" 
+              />
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="bg-orange-400 text-white py-3 px-4 border-none rounded cursor-pointer"
+              className={`w-full py-3 px-4 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg shadow-md transition duration-200 ${
+                isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+              }`}
             >
-              Submit
+              {isSubmitting ? "Sending..." : "Send Message"}
             </button>
           </Form>
         )}
